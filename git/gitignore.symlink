@@ -12,5 +12,7 @@
 .ruby-version
 .vscode/
 dump.rdb
-main.tfvars
 coverage.out
+.direnv
+main.tfvars
+*.tfvars.json

@@ -2,22 +2,22 @@
 
 # Don't ask ssh password all the time
 switch (uname)
-case Darwin
-	git config --global credential.helper osxkeychain
-case '*'
-	git config --global credential.helper cache
+    case Darwin
+        git config --global credential.helper osxkeychain
+    case '*'
+        git config --global credential.helper cache
 end
 
 # better diffs
 if command -qs delta
-	git config --global core.pager delta
-	git config --global interactive.diffFilter 'delta --color-only'
-	git config --global delta.syntax-theme gruvbox-dark
-	git config --global delta.line-numbers true
-	git config --global delta.decorations true
+    git config --global core.pager delta
+    git config --global interactive.diffFilter 'delta --color-only'
+    git config --global delta.syntax-theme gruvbox-dark
+    git config --global delta.line-numbers true
+    git config --global delta.decorations true
 end
 
-abbr -a g 'git'
+abbr -a g git
 abbr -a gl 'git pull --prune'
 abbr -a glg "git log --graph --decorate --oneline --abbrev-commit"
 abbr -a glga "glg --all"
@@ -39,3 +39,4 @@ abbr -a gm 'git switch (git main-branch)'
 abbr -a gms 'git switch (git main-branch); and git sync'
 abbr -a egms 'e; git switch (git main-branch); and git sync'
 abbr -a gwc 'git switch -c'
+abbr -a gst 'git status'

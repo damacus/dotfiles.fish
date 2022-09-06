@@ -135,3 +135,6 @@ format = "[$user]($style)"
 [hostname]
 ssh_symbol = "@"
 format = "$ssh_symbol[$hostname](bright-blue) "
+
+[[battery.display]]
+threshold = 50

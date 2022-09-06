@@ -1,9 +1,8 @@
 # If applied, this commit will...
 
+# Explain why this change is being made
 
-# Why is this change being made?
+# Provide links to any relevant tickets, articles or other resources
 
-
-# Provide links to any relevant tickets, URLs or other resources
-
-
+# DCO Sign-off
+Signed-off-by: Dan Webb <dan.webb@damacus.io>

@@ -1,5 +1,9 @@
 # vi: ft=gitconfig
 
+[user]
+	name = Dan Webb
+	email = dan.webb@damacus.io
+	signingKey = 99DF4C104D4D67BDCB4B2964F5F01E8D94E61CD3
 [alias]
 	co = checkout
 	count = shortlog -sn
@@ -11,6 +15,7 @@
 	commit = commit -s
 	commend = commit -s --amend --no-edit
 	lt = log --tags --decorate --simplify-by-decoration --oneline
+	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
 [color]
 	diff = auto
 	status = auto
@@ -46,12 +51,14 @@
 	gpgsign = true
 [tag]
 	gpgsign = true
+	forceSignAnnotated = true
 [log]
 	showSignature = false
 [pull]
-    ff = only
+	rebase = true
 [init]
     defaultBranch = main
+	templateDir = ~/.dotfiles/git/templates/git-secrets
 [format]
 	signOff = true
 [diff]
@@ -62,4 +69,14 @@
     tool = nvimmerge
 [mergetool "nvimmerge"]
     cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[secrets]
+	providers = git secrets --aws-provider
+	patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}
+	patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
+	patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
+	allowed = AKIAIOSFODNN7EXAMPLE
+	allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY

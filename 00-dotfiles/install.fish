@@ -8,15 +8,15 @@ set -Ux PROJECTS ~/Developer
 fish_add_path -a $DOTFILES/bin $HOME/.bin
 
 for f in $DOTFILES/*/functions
-	if not contains $f $fish_function_path
-		set -Up fish_function_path $f
-	end
+    if not contains $f $fish_function_path
+        set -Up fish_function_path $f
+    end
 end
 
 for f in $DOTFILES/*/conf.d/*.fish
-	ln -sf $f $__fish_config_dir/conf.d/(basename $f)
+    ln -sf $f $__fish_config_dir/conf.d/(basename $f)
 end
 
 if test -f ~/.localrc.fish
-	ln -sf ~/.localrc.fish $__fish_config_dir/conf.d/localrc.fish
+    ln -sf ~/.localrc.fish $__fish_config_dir/conf.d/localrc.fish
 end
