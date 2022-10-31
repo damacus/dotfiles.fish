@@ -18,21 +18,30 @@ packer.init({
 
 packer.startup(function(use)
 	use("wbthomason/packer.nvim") -- Have packer manage itself
-	use("antoinemadec/FixCursorHold.nvim")
-
-	use({
-		"lewis6991/impatient.nvim",
-		config = function()
-			require("impatient").enable_profile()
-		end,
-	})
 
 	use({
 		"rmagatti/auto-session",
 		config = function()
-			require("auto-session").setup({
-				auto_save_enabled = true,
-				auto_restore_enabled = true,
+			require("user.session")
+		end,
+	})
+
+	use({
+		"catppuccin/nvim",
+		as = "catppuccin",
+		config = function()
+			require("user.colorscheme")
+		end,
+	})
+
+	use({
+		"rcarriga/nvim-notify",
+		after = "catppuccin",
+		config = function()
+			vim.notify = require("notify")
+			vim.notify.setup({
+				render = "minimal",
+				stages = "fade",
 			})
 		end,
 	})
@@ -43,13 +52,6 @@ packer.startup(function(use)
 			require("nvim-web-devicons").setup({
 				default = true,
 			})
-		end,
-	})
-
-	use({
-		"sainnhe/gruvbox-material",
-		config = function()
-			require("user.colorscheme")
 		end,
 	})
 
@@ -68,7 +70,6 @@ packer.startup(function(use)
 					spinner = "dots",
 				},
 				window = {
-					relative = "win",
 					blend = 0,
 				},
 			})
@@ -89,9 +90,7 @@ packer.startup(function(use)
 
 	use({
 		"nvim-lualine/lualine.nvim",
-		requires = {
-			"nvim-lua/lsp-status.nvim",
-		},
+		after = "catppuccin",
 		config = function()
 			require("user.lualine")
 		end,
@@ -106,10 +105,20 @@ packer.startup(function(use)
 
 	use({
 		"akinsho/bufferline.nvim",
+		after = {
+			"nvim-web-devicons",
+			"catppuccin",
+		},
+		requires = {
+			"mhinz/vim-sayonara",
+		},
 		config = function()
 			require("bufferline").setup({
+				highlights = require("catppuccin.groups.integrations.bufferline").get(),
 				options = {
 					diagnostics = "nvim_lsp",
+					close_command = "Sayonara!",
+					right_mouse_command = "Sayonara!",
 				},
 			})
 		end,
@@ -119,13 +128,6 @@ packer.startup(function(use)
 		"akinsho/toggleterm.nvim",
 		config = function()
 			require("user.toggleterm")
-		end,
-	})
-
-	use({
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup({})
 		end,
 	})
 
@@ -140,6 +142,13 @@ packer.startup(function(use)
 		"folke/which-key.nvim",
 		config = function()
 			require("which-key").setup()
+		end,
+	})
+
+	use({
+		"folke/trouble.nvim",
+		config = function()
+			require("user.trouble")
 		end,
 	})
 
@@ -169,7 +178,6 @@ packer.startup(function(use)
 			"onsails/lspkind-nvim",
 			"neovim/nvim-lspconfig",
 			"jose-elias-alvarez/null-ls.nvim",
-			"nvim-lua/lsp-status.nvim",
 			"onsails/lspkind-nvim",
 			"simrat39/symbols-outline.nvim",
 
@@ -189,25 +197,22 @@ packer.startup(function(use)
 			"saadparwaiz1/cmp_luasnip",
 			"L3MON4D3/LuaSnip",
 			"rafamadriz/friendly-snippets",
+
+			-- autopairs (x cmp)
+			"windwp/nvim-autopairs",
 		},
 		config = function()
 			require("lspkind").init()
 			require("luasnip").setup({
 				-- see: https://github.com/L3MON4D3/LuaSnip/issues/525
-				region_check_events = "CursorHold,InsertLeave,InsertEnter",
-				delete_check_events = "TextChanged,InsertEnter",
+				region_check_events = "InsertEnter",
+				delete_check_events = "InsertLeave",
 			})
-			require("luasnip.loaders.from_vscode").load()
+			require("luasnip.loaders.from_vscode").lazy_load()
+			require("nvim-autopairs").setup()
 			require("user.lsp")
 			require("user.symbols-outline")
 			require("user.cmp")
-		end,
-	})
-
-	use({
-		"folke/trouble.nvim",
-		config = function()
-			require("user.trouble")
 		end,
 	})
 
@@ -219,7 +224,8 @@ packer.startup(function(use)
 	})
 
 	use({
-		"nvim-treesitter/nvim-treesitter",
+		"caarlos0/nvim-treesitter",
+		branch = "vhs",
 		run = ":TSUpdate",
 		config = function()
 			require("user.treesitter")
@@ -227,7 +233,6 @@ packer.startup(function(use)
 		requires = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-context",
-			"lewis6991/spellsitter.nvim",
 		},
 	})
 
@@ -252,14 +257,21 @@ packer.startup(function(use)
 
 	use({
 		"TimUntersberger/neogit",
+		requires = {
+			"sindrets/diffview.nvim",
+			"nvim-lua/plenary.nvim",
+		},
 		config = function()
 			require("neogit").setup({
 				disable_commit_confirmation = true,
 				disable_context_highlighting = true,
 				disable_signs = true,
 				disable_hint = true,
+				integrations = {
+					diffview = true,
+				},
 			})
-			require("user.remap").nnoremap("<leader>gs", ":Neogit<CR>")
+			require("user.remap").nnoremap("<leader>gs", ":lua require('neogit').open()<CR>")
 		end,
 	})
 
@@ -275,9 +287,9 @@ packer.startup(function(use)
 		config = function()
 			vim.api.nvim_create_autocmd("TextYankPost", {
 				callback = function()
-					vim.cmd([[
-						if v:event.operator is 'y' && v:event.regname is '+' | execute 'OSCYankReg +' | endif
-					]])
+					if vim.v.event.operator == "y" and vim.v.event.regname == "+" then
+						vim.cmd([[OSCYankReg +]])
+					end
 				end,
 				pattern = "*",
 				group = vim.api.nvim_create_augroup("OSCYank", { clear = true }),
@@ -309,8 +321,8 @@ if is_bootstrap then
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
--- vim.api.nvim_create_autocmd("BufWritePost", {
--- 	command = "source <afile> | PackerSync",
--- 	group = vim.api.nvim_create_augroup("Packer", { clear = true }),
--- 	pattern = "plugins.lua",
--- })
+vim.api.nvim_create_autocmd("BufWritePost", {
+	command = "source <afile> | PackerSync",
+	group = vim.api.nvim_create_augroup("Packer", { clear = true }),
+	pattern = "plugins.lua",
+})

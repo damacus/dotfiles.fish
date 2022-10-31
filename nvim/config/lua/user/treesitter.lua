@@ -28,6 +28,7 @@ require("nvim-treesitter.configs").setup({
 		"toml",
 		"vim",
 		"yaml",
+		"vhs",
 	},
 	auto_install = true,
 	autopairs = {
@@ -95,4 +96,8 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
-require("spellsitter").setup()
+vim.filetype.add({
+	extension = {
+		tape = "vhs",
+	},
+})

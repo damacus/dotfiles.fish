@@ -10,11 +10,10 @@ end
 
 # better diffs
 if command -qs delta
-    git config --global core.pager delta
-    git config --global interactive.diffFilter 'delta --color-only'
-    git config --global delta.syntax-theme gruvbox-dark
-    git config --global delta.line-numbers true
-    git config --global delta.decorations true
+	git config --global core.pager delta
+	git config --global interactive.diffFilter 'delta --color-only'
+	git config --global delta.line-numbers true
+	git config --global delta.decorations true
 end
 
 abbr -a g git

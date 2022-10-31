@@ -1,15 +1,11 @@
 require("lualine").setup({
 	options = {
-		theme = "gruvbox-material",
+		theme = "catppuccin",
 		component_separators = "",
 		section_separators = "",
 	},
 	sections = {
 		lualine_c = {
-			{
-				"filetype",
-				icon_only = true,
-			},
 			{
 				"filename",
 				file_status = false,
@@ -17,10 +13,8 @@ require("lualine").setup({
 			},
 		},
 		lualine_x = {
-			function()
-				return require("lsp-status").status()
-			end,
 			"encoding",
+			"filetype",
 		},
 	},
 })

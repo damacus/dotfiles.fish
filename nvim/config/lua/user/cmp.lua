@@ -84,8 +84,7 @@ cmp.setup({
 		{ name = "calc" },
 	}),
 	confirm_opts = {
-		behavior = cmp.ConfirmBehavior.Replace,
-		select = false,
+		behavior = cmp.ConfirmBehavior.Select,
 	},
 	experimental = {
 		native_menu = false,
@@ -94,16 +93,20 @@ cmp.setup({
 })
 
 cmp.setup.cmdline(":", {
-	sources = {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
 		{ name = "cmdline" },
-	},
+	}, {
+		{ name = "path" },
+	}),
 })
 
-cmp.setup.cmdline("/", {
+cmp.setup.cmdline({ "/", "?" }, {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
 		{ name = "buffer" },
-		{ name = "path" },
 	},
 })
 
-cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done({ map_char = { tex = "" } }))
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
