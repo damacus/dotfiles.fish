@@ -58,7 +58,7 @@
 	rebase = true
 [init]
     defaultBranch = main
-	templateDir = ~/.dotfiles/git/templates/git-secrets
+	templateDir = ~/.dotfiles/git/templates/hooks
 [format]
 	signOff = true
 [diff]

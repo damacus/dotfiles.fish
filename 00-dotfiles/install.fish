@@ -3,7 +3,7 @@ set -Ux EDITOR nvim
 set -Ux VISUAL $EDITOR
 
 set -Ux DOTFILES ~/.dotfiles
-set -Ux PROJECTS ~/Developer
+set -Ux PROJECTS ~/repos
 
 fish_add_path -a $DOTFILES/bin $HOME/.bin
 
