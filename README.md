@@ -1,6 +1,6 @@
 # Deprecated
 
-There's a lot of things you can copy for your dotfiles, but the latest and greatest versions 
+There's a lot of things you can copy for your dotfiles, but the latest and greatest versions
 of everything are being kept **only** [here](https://github.com/caarlos0/dotfiles.nix).
 
 ----
@@ -91,9 +91,8 @@ To install them all with `brew`:
 
 ```console
 brew install \
-  alacritty \
   bat \
-  exa \
+  eza \
   fd \
   fish \
   fzf \
@@ -105,14 +104,6 @@ brew install \
   neovim \
   starship \
   zoxide
-```
-
-On Ubuntu:
-
-```console
-sh -c "$(curl -fsSL https://starship.rs/install.sh)"
-sudo apt install fish grc fzf zoxide fd-find exa bat alacritty kitty neovim
-# TODO: install delta, kubectx
 ```
 
 ## macOS defaults
