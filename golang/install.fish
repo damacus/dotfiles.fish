@@ -6,5 +6,5 @@ if command -qs go
     go install github.com/go-delve/delve/cmd/dlv@latest
 end
 
-abbr -a gmt='go mod tidy'
-abbr -a grm='go run ./...'
+abbr -a gmt 'go mod tidy'
+abbr -a grm 'go run ./...'

@@ -2,12 +2,12 @@
 abbr -a less 'less -r'
 
 if command -qs eza
-    abbr -a l='eza -lh --icons'
-    abbr -a ll='eza -l --icons'
-    abbr -a lt='eza -l --icons --tree --level=2'
+    abbr -a l 'eza -lh --icons'
+    abbr -a ll 'eza -l --icons'
+    abbr -a lt 'eza -l --icons --tree --level=2'
 else
-    abbr -a l='ls -lAh'
-    abbr -a ll='ls -l'
+    abbr -a l 'ls -lAh'
+    abbr -a ll 'ls -l'
 end
 
 if command -qs fdfind
@@ -18,7 +18,7 @@ if command -qs batcat
     ln -sf (which batcat) ~/.bin/bat
 end
 if command -qa bat
-    abbr -a cat=bat
+    abbr -a cat bat
     set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
 end
 
