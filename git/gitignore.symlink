@@ -17,3 +17,6 @@ coverage.out
 coverage.txt
 .luarc.json
 *.log
+.direnv
+main.tfvars
+*.tfvars.json
