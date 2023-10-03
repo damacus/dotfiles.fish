@@ -1,8 +1,11 @@
 # vi: ft=sshconfig
 
+<<<<<<< Updated upstream
 Host *
 	ServerAliveInterval 60
 
+=======
+>>>>>>> Stashed changes
 Host localhost
 	UserKnownHostsFile /dev/null
 	StrictHostKeyChecking no
