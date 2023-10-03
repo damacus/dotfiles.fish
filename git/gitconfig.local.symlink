@@ -61,10 +61,6 @@
     cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [rerere]
 	enabled = true
-[user]
-	name = Dan Webb
-	email = dan.webb@damacus.io
-	signingKey = 99DF4C104D4D67BDCB4B2964F5F01E8D94E61CD3
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
