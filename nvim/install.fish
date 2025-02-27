@@ -3,9 +3,9 @@ if not command -qs nvim
     exit
 end
 
-abbr -a e 'nvim'
-abbr -a v 'nvim'
-abbr -a vim 'nvim'
+# abbr -a e 'nvim'
+# abbr -a v 'nvim'
+# abbr -a vim 'nvim'
 
 if command -qs cargo
     cargo install tree-sitter-cli &>/dev/null

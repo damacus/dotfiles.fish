@@ -1,8 +1,32 @@
 # vi: ft=sshconfig
 
-Host *
-	ServerAliveInterval 60
+Host black-pi
+  HostName 192.168.1.100
+  User pi
 
-Host localhost
-	UserKnownHostsFile /dev/null
-	StrictHostKeyChecking no
+Host red-pi
+  HostName 192.168.1.101
+  User pi
+
+Host green-pi
+  HostName 192.168.1.102
+  User pi
+
+Host yellow-pi
+  HostName 192.168.1.103
+  User pi
+
+Host blue-pi
+  HostName 192.168.1.104
+  User pi
+
+Host purple-pi
+  HostName 192.168.1.105
+  User pi
+
+Host orange-pi
+  User pi
+
+Host blackberry-pi
+  User pi
+
